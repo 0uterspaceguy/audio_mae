@@ -1,0 +1,47 @@
+exp_label: 'Audio_MAE'
+
+data:
+    train: /home/krasnoyaruzhskiy/Desktop/audio_data/train
+    test: /home/krasnoyaruzhskiy/Desktop/audio_data/test
+    params:
+        sr: 16000
+        n_mels: 128
+        n_fft: 2048
+        hop_length: 126
+        win_length: 2048 
+        ms: 500
+
+model:
+    num_mels: 128
+    mel_len: 64
+    in_chans: 1
+    patch_size: 16
+    embed_dim: 768
+    encoder_depth: 12
+    num_heads: 12
+    decoder_embed_dim: 512
+    decoder_depth: 16
+    decoder_num_heads: 16
+    mlp_ratio: 4
+
+training:
+    epochs: 150
+    batch_size: 4
+    n_workers: 1
+    patience: 5000
+    warmup: 200
+    lr: 0.00015
+    min_lr: 0.00000005
+    factor: 0.99
+
+export:
+    onnx:
+        opset: 10
+        dynamic: False
+        batch_size: 1
+
+wandb:
+    project: Audio_MAE
+    user: outerspaceguy
+
+
